@@ -1,0 +1,36 @@
+#include "..\script_macros.hpp"
+/*
+    File: fn_initMedic.sqf
+    Author: Bryan "Tonic" Boardwine
+
+    Description:
+    Initializes the medic..
+*/
+player addRating 99999999;
+waitUntil {!(isNull (findDisplay 46))};
+
+if ((FETCH_CONST(life_medicLevel)) < 1 && (FETCH_CONST(life_adminlevel) isEqualTo 0)) exitWith {
+    ["Notwhitelisted",false,true] call BIS_fnc_endMission;
+    sleep 35;
+};
+
+[] call life_fnc_spawnMenu;
+waitUntil{!isNull (findDisplay 38500)}; //Wait for the spawn selection to be open.
+waitUntil{isNull (findDisplay 38500)}; //Wait for the spawn selection to be done.
+
+if((getPos player) distance (getMarkerPos "civ_spawn_1") < 500) then
+{
+	[] execVM "qui\Kavala.sqf";
+};
+if((getPos player) distance (getMarkerPos "civ_spawn_2") < 500) then
+{
+	[] execVM "qui\Pyrgos.sqf";
+};
+if((getPos player) distance (getMarkerPos "civ_spawn_3") < 500) then
+{
+	[] execVM "qui\Athira.sqf";
+};
+if((getPos player) distance (getMarkerPos "civ_spawn_4") < 500) then
+{
+	[] execVM "qui\Sofia.sqf";
+};
